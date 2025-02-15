@@ -1,26 +1,11 @@
-import {
-  Component,
-  ViewChild,
-  ViewContainerRef
-} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
+import { Component } from '@angular/core';
+import { HighlightDirective } from './highlight.directive';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  template: `<h1>Welcome to Angular!</h1> 
-                  <button (click)="loadChild()">Load Child Component</button> 
-                  <ng-container #container></ng-container>`,
-  standalone: true
+  standalone: true,
+  template: `<p appHighlight> my highlighted text  </p>`,
+  imports: [HighlightDirective]
 })
-export class AppComponent {
-  @ViewChild('container', { read: ViewContainerRef })
-  container!: ViewContainerRef;
-
-  async loadChild() {
-    const { ChildComponent } = await import('./child/child.component');
-    this.container.clear();
-    this.container.createComponent(ChildComponent);
-  }
-}
+export class AppComponent { }
